@@ -1,0 +1,23 @@
+{
+  "name": "hello-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tsrnd/hello-node.git"
+  },
+  "author": "at-yenho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tsrnd/hello-node/issues"
+  },
+  "homepage": "https://github.com/tsrnd/hello-node#readme"
+}
