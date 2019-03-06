@@ -4,7 +4,8 @@
   "description": "",
   "main": "main.js",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "sleep": "^6.0.0"
   },
   "devDependencies": {},
   "scripts": {

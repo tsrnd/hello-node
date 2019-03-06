@@ -36,13 +36,13 @@ console.log("Program Ended.");
 console.log("---------------------------------------------------------------------");
 
 var fs = require("fs");
-var data = fs.readFileSync('input.txt');
+var data = fs.readFileSync(__dirname+'/input.txt');
 
 console.log(data.toString());
 console.log("Sync Program Ended");
 
 console.log("ASync with Callback");
-fs.readFile('input.txt', function (err, data) {
+fs.readFile(__dirname+'/input.txt', function (err, data) {
     if (err) return console.error(err);
     console.log(data.toString());
 });
