@@ -13,8 +13,6 @@ http.createServer(function (req, resp) {
 
     var f = fs.createReadStream('./tmp/big.txt')
     f.pipe(resp)
-
 }).listen(port)
 
 console.log('server running on port ', port)
-
