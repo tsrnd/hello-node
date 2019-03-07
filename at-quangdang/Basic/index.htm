@@ -7,6 +7,20 @@
             FirstName: <input type="text" name="first_name"> <br>
             Last Name: <input type="text" name="last_name">
             <input type="submit" value="submit">
+        </form> <br>
+
+        <h1>Form For Post 
+            <form action="http://127.0.0.1:8081/progress_post" method="POST">
+                First Name: <input type="text" name="first_name">  <br>
+                Last Name: <input type="text" name="last_name">
+                <input type="submit" value="submit">
+            </form> <br>
+        <h3>File Upload</h3>
+        <form action="http://127.0.0.1:8081/file_upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" size="50"/>
+            <br/>
+            <input type="submit" name="submit" value="Upload File"/>
         </form>
     </body>
 </html>
+
