@@ -9,7 +9,11 @@
   "author": "at-namnguyen",
   "license": "ISC",
   "dependencies": {
+    "access-log": "^0.4.1",
+    "cookie-parser": "^1.4.4",
     "express": "^4.16.4",
+    "express-group-routes": "^1.1.0",
+    "multer": "^1.4.1",
     "sleep": "^6.0.0"
   },
   "devDependencies": {
