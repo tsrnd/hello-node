@@ -1,2 +1,1 @@
-# Hello Node.js
-
+# Node.js RESTful API - Project Template
