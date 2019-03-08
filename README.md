@@ -15,7 +15,7 @@ $ cd D2/callback/
 $ node blocking_code.js
 
 # output : 
-# Hello nodejs - I'm HuyDoan
+Hello nodejs - I'm HuyDoan
 ```
 
 - call file with callback
@@ -25,6 +25,18 @@ $ cd D2/callback/
 $ node non-blocking_code.js
 
 # output : 
-# Program Ended
-# Hello nodejs - I'm HuyDoan
+Program Ended
+Hello nodejs - I'm HuyDoan
+```
+
+# event loop
+
+```
+$ cd D2/event-loop/
+$ node main.js
+
+# output : 
+connection successful.
+data received successfully.
+Program Ended.
 ```
