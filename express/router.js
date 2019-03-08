@@ -1,7 +1,8 @@
 const express = require('express')
 require('express-group-routes')
 const middleware = require('./http/middleware/middleware')
-const ctrls = require('./http/controllers/web_controller')
+const webCtrls = require('./http/controllers/web_controller')
+const apiCtrls = require('./http/controllers/api_controller')
 const path = require('path')
 const bodyParser = require('body-parser');
 
@@ -17,12 +18,17 @@ router.use('/static', express.static(path.join(__dirname, 'public')))
 router.use(bodyParser.urlencoded({ extended: false }))
 
 // route setting
+router.group('/api/v1', (router) => {
+    router.post('/login', apiCtrls.postLogin)
+    // router.route('users')
+})
+
 router.group('/', (router) => {
     router.route('/form')
-        .get(ctrls.getForm)
-        .post(ctrls.postForm)
-    router.get('/', ctrls.home)
-    router.get('/*', ctrls.notFound)
+        .get(webCtrls.getForm)
+        .post(webCtrls.postForm)
+    router.get('/', webCtrls.home)
+    router.get('/*', webCtrls.notFound)
 })
 
 module.exports = router
