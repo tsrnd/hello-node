@@ -1,0 +1,27 @@
+<html>
+    <body>
+        <div>
+            <h3>Form get info</h3>
+            <form action="http://127.0.0.1:8000/get-info" method="GET">
+                Name: <input type="text" name="name">  <br>
+                Age: <input type="number" name="age">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <div>
+            <h3>Form post info</h3>
+            <form action="http://127.0.0.1:8000/post-info" method="POST">
+                Name: <input type="text" name="name">  <br>
+                Age: <input type="number" name="age">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <div>
+            <h3>Form upload file</h3>
+            <form action="http://127.0.0.1:8000/file-upload" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" size="50" /> <br/>
+                <input type="submit" value="Upload File" />
+            </form>
+        </div>
+    </body>
+</html>
