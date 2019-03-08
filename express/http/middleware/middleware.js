@@ -6,6 +6,13 @@ var accessLog = (req, res, next) => {
     next()
 }
 
+// auth middleware
+var auth = (req, res, next) => {
+    console.log('comming soon')
+    next()
+}
+
 module.exports = {
     accessLog,
+    auth,
 }
