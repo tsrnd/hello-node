@@ -6,7 +6,8 @@ clients = []
 
 var server = net.createServer((socket) => {
     socket.on('data', (data) => {
-        console.log(socket)
+        // console.log(socket)
+        // socket.pipe(process.stdout)
         clients.forEach((client, index)=>{
             if (client.id == socket.id) {
                 return
