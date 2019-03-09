@@ -1,0 +1,22 @@
+{
+  "name": "HelloNode",
+  "version": "1.0.0",
+  "description": "QuanTran2 NodeJs Study",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/tsrnd/hello-node.git"
+  },
+  "author": "quan.tran2@asiantech.vn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tsrnd/hello-node/issues"
+  },
+  "homepage": "https://github.com/tsrnd/hello-node#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
