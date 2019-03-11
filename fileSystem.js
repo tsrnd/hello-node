@@ -9,18 +9,18 @@
 
 var fs = require("fs");
 
-// console.log("Going to get file info!");
-// fs.stat('input.txt', function (err, stats) {
-//    if (err) {
-//       return console.error(err);
-//    }
-//    console.log(stats.dev);
-//    console.log("Got file info successfully!");
+console.log("Going to get file info!");
+fs.stat('input.txt', function (err, stats) {
+   if (err) {
+      return console.error(err);
+   }
+   console.log(stats.dev);
+   console.log("Got file info successfully!");
    
-//    // Check file type
-//    console.log("isFile ? " + stats.isFile());
-//    console.log("isDirectory ? " + stats.isDirectory());    
-// });
+   // Check file type
+   console.log("isFile ? " + stats.isFile());
+   console.log("isDirectory ? " + stats.isDirectory());    
+});
 /// ------------
 // fs.writeFile('input.txt', "i am a supermen", function(err) {
 //     if (err) {
@@ -56,17 +56,7 @@ var fs = require("fs");
 //    console.log("File deleted successfully!");
 // });
 //-----------
-var fs = require("fs");
 
-console.log("Going to read directory /tmp");
-fs.readdir("/Documents/",function(err, files) {
-   if (err) {
-      return console.error(err);
-   }
-   files.forEach( function (file) {
-      console.log( file );
-   });
-});
 
 
 
