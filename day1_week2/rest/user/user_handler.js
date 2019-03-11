@@ -1,11 +1,11 @@
 var appRoot = require('app-root-path');
 var express = require('express');
-var app = express();
 var fs = require("fs");
-readerStream = fs.createReadStream(appRoot + "/day1_week2/rest/users.json")
-readerStream.setEncoding('UTF8');
+
 module.exports = {
     "getAllUsers": function (req, res) {
+        readerStream = fs.createReadStream(appRoot + "/day1_week2/rest/users.json")
+        readerStream.setEncoding('UTF8');
         readerStream.pipe(res)
         readerStream.on('error', function(err) {
             console.log(err)
@@ -15,6 +15,8 @@ module.exports = {
 
     "getUser": function (req, res) {
         dataJSONStr = '';
+        readerStream = fs.createReadStream(appRoot + "/day1_week2/rest/users.json")
+        readerStream.setEncoding('UTF8');
         readerStream.on('data', function(chunk) {
             dataJSONStr += chunk;
         });
@@ -40,6 +42,8 @@ module.exports = {
     },
 
     "deleteUser": function (req, res) {
+        readerStream = fs.createReadStream(appRoot + "/day1_week2/rest/users.json")
+        readerStream.setEncoding('UTF8');
         dataJSONStr = '';
         readerStream.on('data', function(chunk) {
             dataJSONStr += chunk;
@@ -50,15 +54,15 @@ module.exports = {
             data = dataJSON.filter( function(item) {
                 return item.id != req.params.id;
             });
+            console.log(data.length ,dataJSON)
             if (data.length == dataJSON.length) {
                 res.sendStatus(404);
                 return
             }
-            fs.writeFile(__dirname + "/" + "users.json", JSON.stringify(data, null, 4), function(){})
+            fs.writeFile(appRoot + "/day1_week2/rest/users.json", JSON.stringify(data, null, 4), function(){})
 
             console.log(data)
             res.end("Delete successful!");
-
         });
 
         readerStream.on('error', function(err) {
