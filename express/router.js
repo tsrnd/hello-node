@@ -16,6 +16,10 @@ router.use(middleware.accessLog)
 router.use('/static', express.static(path.join(__dirname, 'public')))
 // parse application/x-www-form-urlencoded
 router.use(bodyParser.urlencoded({ extended: false }))
+router.use((req, res, next) => {
+    res.setHeader('Content-Type', 'application/json')
+    next()
+})
 
 // route setting
 router.group('/api/v1', (router) => {
@@ -24,7 +28,7 @@ router.group('/api/v1', (router) => {
 })
 
 router.group('/', (router) => {
-    router.route('/form')
+    router.use(middleware.auth).route('/form')
         .get(webCtrls.getForm)
         .post(webCtrls.postForm)
     router.get('/', webCtrls.home)
