@@ -7,6 +7,8 @@ var url = 'mongodb://localhost:27017/mongo_example';
 
 var mydbo;
 
+
+
 MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
     if (err) throw err;
     var dbo = db.db("mongo_example");
@@ -17,12 +19,17 @@ MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
     });
 });
 
-app.get('/customer/all', function(req, res) {
-    mydbo.find({}).toArray(function(err, result) {
-        if (err) throw err;
-        res.end(result);
+var getAll = function(req, res) {
+    app.get('/customer/all', function(req, res) {
+        console.log("get here")
+        mydbo.find({}).toArray(function(err, result) {
+            if (err) throw err;
+            res.end(result);
+        });
     });
-});
+}
+
+
 
 app.post('/customer/add', function(req, res) {
     

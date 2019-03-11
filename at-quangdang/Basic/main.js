@@ -219,7 +219,7 @@ var fs = require('fs');
  * callback − This is the callback function which gets two arguments (err, stats)
  *  where stats is an object of fs.Stats type which is printed below in the example.
  */
-
+    
  
  fs.stat('input.txt', function(err, stat){
     if (err) {
