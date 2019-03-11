@@ -1,9 +1,9 @@
 var appRoot = require('app-root-path');
-var express = require('express');
 var fs = require("fs");
-
+var jwt = require('jsonwebtoken');
+config_app = require(appRoot+ "/day1_week2/rest/config.json")
 module.exports = {
-    "getAllUsers": function (req, res) {
+    "getAllUsers": (req, res) => {
         readerStream = fs.createReadStream(appRoot + "/day1_week2/rest/users.json")
         readerStream.setEncoding('UTF8');
         readerStream.pipe(res)
@@ -13,45 +13,43 @@ module.exports = {
         });
     },
 
-    "getUser": function (req, res) {
+    "getUser": (req, res) => {
         dataJSONStr = '';
         readerStream = fs.createReadStream(appRoot + "/day1_week2/rest/users.json")
         readerStream.setEncoding('UTF8');
-        readerStream.on('data', function(chunk) {
+        readerStream.on('data', (chunk) => {
             dataJSONStr += chunk;
         });
 
-        readerStream.on('end',function() {
+        readerStream.on('end', () => {
             dataJSON = JSON.parse(dataJSONStr)
-            user = dataJSON.find(function(element) {
+            user = dataJSON.find((element) => {
                 return element.id == req.params.id
             })
             if (user == null) {
                 res.sendStatus(404);
                 return
             }
-            console.log(user)
-            res.end(JSON.stringify(user));
-
+            res.end(JSON.stringify(req.user));        
         });
 
-        readerStream.on('error', function(err) {
+        readerStream.on('error', (err) => {
             console.log(err)
             res.status(500).send('Something broke!');
         });
     },
 
-    "deleteUser": function (req, res) {
+    "deleteUser": (req, res) => {
         readerStream = fs.createReadStream(appRoot + "/day1_week2/rest/users.json")
         readerStream.setEncoding('UTF8');
         dataJSONStr = '';
-        readerStream.on('data', function(chunk) {
+        readerStream.on('data', (chunk) => {
             dataJSONStr += chunk;
         });
 
-        readerStream.on('end',function() {
+        readerStream.on('end', () => {
             dataJSON = JSON.parse(dataJSONStr)
-            data = dataJSON.filter( function(item) {
+            data = dataJSON.filter((item) => {
                 return item.id != req.params.id;
             });
             console.log(data.length ,dataJSON)
@@ -65,9 +63,42 @@ module.exports = {
             res.end("Delete successful!");
         });
 
-        readerStream.on('error', function(err) {
+        readerStream.on('error', (err) => {
             console.log(err)
             res.status(500).send('Something broke!');
         });
+    },
+
+    "login": (req, res) => {
+        console.log(req.body)
+        dataJSONStr = '';
+        readerStream = fs.createReadStream(appRoot + "/day1_week2/rest/users.json")
+        readerStream.setEncoding('UTF8');
+        readerStream.on('data', (chunk) => {
+            dataJSONStr += chunk;
+        });
+
+        readerStream.on('end', () => {
+            dataJSON = JSON.parse(dataJSONStr)
+            user = dataJSON.find((element) => {
+                return element.name == req.body.name && element.password == req.body.password
+            })
+            if (user == null) {
+                res.status(400).send("Username or password is incorrect");
+                return
+            }
+            token = jwt.sign({
+                exp: Math.floor(Date.now() / 1000) + (60 * 60),
+                data: {"id": user.id}},config_app.jwt.private_key);
+            res.end(JSON.stringify({"token": token}));
+        });
+
+        readerStream.on('error', (err) => {
+            console.log(err)
+            res.status(500).send('Something broke!');
+        });
+    },
+    "profile": (req, res) => {
+        res.end(JSON.stringify(req.user));        
     }
 }
