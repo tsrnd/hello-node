@@ -1,11 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
+</head>
+
+<body>
     <h1><%= title %></h1>
-    <p>Welcome to user <%= id %></p>
-  </body>
+    <p>This is detail <%= title %> <%= id %></p>
+    <p>Name <%= name %></p>
+    <i>Logtime: <%= logTime %></i>
+    <br>
+    <!-- enctype must be set to the type you will parse before methodOverride() -->
+    <span>
+    <form method="POST" action="/products/<%= id %>" style="display:inline;">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete">
+    </form>
+    <a href="/products/<%= id %>/edit">Edit</a>
+</span>
+    <a href="/products">List</a>
+</body>
+
 </html>

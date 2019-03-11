@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>List product</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+        <ul>
+            <% products.forEach((product) => { %>
+                <li>
+                    <h5>Product: <%= product._id.toString()%></h5>
+                    <label for=""><%= product.name%></label>
+                    <i><%= product.detail%></i>
+                    <a href="/products/<%= product._id.toString()%>">Show</a>
+                    <a href="/products/<%= product._id %>/edit">Edit</a>
+                    <form method="POST" action="/products/<%= product._id %>" style="display:inline;">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="submit" value="Delete">
+                    </form>
+                </li>
+            <% }); %>
+        </ul>
+    
+</body>
+</html>
