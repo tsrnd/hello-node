@@ -1,7 +1,8 @@
+require('dotenv').config();
 import { ObjectId } from 'mongodb';
-const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017/';
 const DB  = {};
+const MongoClient = require('mongodb').MongoClient;
+const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}?retryWrites=true`;
 DB.connect = async () => {
     try {
         return new Promise((resolve, reject) => {
@@ -13,6 +14,23 @@ DB.connect = async () => {
         throw err;
     }
 }
+DB.create = async (db, params) => {
+    try {
+        return new Promise((resolve, reject) => {
+            db
+                .collection('products')
+                .insertOne({
+                    name: params.name,
+                    detail: params.detail
+                }, (err, res) => {
+                    resolve(res);
+                });
+        });
+    } catch (err) {
+        throw err;
+    }
+};
+
 DB.find = async (db, id) => {
     try {
         return new Promise((resolve, reject) => {
