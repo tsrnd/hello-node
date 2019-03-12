@@ -1,8 +1,21 @@
 const path = require('path')
+const fs = require('fs')
 
 // home controller
 var home = (req, res) => {
-    res.sendFile(path.join(__dirname + '../../../resources/views/index.html'))
+    jsonData = ''
+    f = fs.ReadStream(path.join(__dirname, './../../../tmp/posts.json'), (err) => {
+        if (err) {
+            throw err
+        }
+    })
+    f.on('data', (chunk) => {
+        jsonData += chunk.toString()
+    })
+    f.on('end', ()=>{
+        console.log(jsonData)
+        res.render('main', {posts: JSON.parse(jsonData)});
+    })
 }
 
 var getForm = (req, res) => {
