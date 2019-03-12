@@ -1,13 +1,13 @@
 # Hello Node.js
 
-### REPL Terminal
+## REPL Terminal
 https://www.tutorialspoint.com/nodejs/nodejs_repl_terminal.htm
 
-### npm install
+## npm install
 https://www.tutorialspoint.com/nodejs/nodejs_npm.htm
 
+## Day 2
 ### callback
-
 - call file without callback
 
 ```
@@ -29,8 +29,7 @@ Program Ended
 Hello nodejs - I'm HuyDoan
 ```
 
-# event loop
-
+### event loop
 ```
 $ cd D2/event-loop/
 $ node main.js
@@ -38,5 +37,20 @@ $ node main.js
 # output : 
 connection successful.
 data received successfully.
+Program Ended.
+```
+
+### event emitter
+```
+$ cd D2/event-emitter/
+$ node main.js
+
+# output : 
+2 Listner(s) listening to connection event
+listener1 executed !
+listener2 executed !
+Listener1 will not listen now.
+listener2 executed !
+1 Listner(s) listening to connection event
 Program Ended.
 ```
