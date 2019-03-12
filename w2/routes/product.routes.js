@@ -5,7 +5,7 @@ import ProductController from '../controllers/product.controllers';
 
 router
     .get('/create', ProductController.create)
-    .post('/store', ProductController.store)
+    .post('/store', [logTime], ProductController.store)
     .get('/:id/edit', ProductController.edit)
     .put('/:id', ProductController.update)
     .get('/', ProductController.index)
