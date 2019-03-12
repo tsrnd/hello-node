@@ -54,3 +54,19 @@ listener2 executed !
 1 Listner(s) listening to connection event
 Program Ended.
 ```
+
+## Day 3
+### Buffer 
+- document : https://nodejs.org/api/buffer.html
+
+```
+$ cd D3/buffers/
+$ node main.js
+
+# output : 
+Octets written : 20
+abcdefghijklmnopqrstuvwxyz
+1234 > 0123
+[ <Buffer 30 31 32 33>, <Buffer 31 32 33 34> ]
+Node.js
+```
