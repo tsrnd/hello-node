@@ -70,3 +70,22 @@ abcdefghijklmnopqrstuvwxyz
 [ <Buffer 30 31 32 33>, <Buffer 31 32 33 34> ]
 Node.js
 ```
+
+### Streams
+
+```
+$ cd D3/streams/
+$ node read.js
+
+# output : 
+Program Ended
+Hello nodejs - I'm HuyDoan
+I'm from Asiantech Company
+Nice to meet you !
+
+$ node write.js
+
+# output : 
+Program Ended
+Write completed.
+```
