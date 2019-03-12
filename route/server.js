@@ -16,9 +16,14 @@ http.createServer(function(request, response) {
         request.on('data', chunk => {
             body += chunk;
         });
+        
         request.on('end', () => {
             console.log(qs.parse(body));
             response.end('ok');
+        });
+
+        request.on('error', function(err){
+            console.log(err.stack);
         });
     }
 }).listen(6969, '127.0.0.1');

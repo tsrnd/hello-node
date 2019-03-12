@@ -5,7 +5,11 @@ console.log('Start');
 var readFile =  file.readFileSync('read-write-file/input.txt', 'utf8');
 
 //asynchronize
-var readFileAsyn = file.readFile('read-write-file/input.txt', 'utf8', function(err, data) {
+var readFileAsyn = file.readFile('read-write-file/input1.txt', 'utf8', function(err, data) {
+    if (err) {
+        console.log(err.stack);
+        return;
+     }
     if(true) return console.log('Asynchronize ' + data);
     return 0;
 });
