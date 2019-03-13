@@ -1,0 +1,15 @@
+doctype html
+html
+  include head.pug
+  body
+    h1= message
+    p Welcome to nodejs.
+    - var a = 0
+    case a
+        when 0
+            p result 0
+        default
+            p default
+    - for(var x = 0; x <=3; x++)
+        li item
+  include footer.pug
