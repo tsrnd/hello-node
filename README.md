@@ -89,3 +89,17 @@ $ node write.js
 Program Ended
 Write completed.
 ```
+
+### File system
+
+- file
+```
+$ cd D3/file_system/
+$ node file-info.js
+$ node openfile-flags.js
+$ node read-file.js
+$ node sync-asyn.js
+$ node truncate-file.js
+$ node write-file.js
+```
+- directory : same with file : https://www.tutorialspoint.com/nodejs/nodejs_file_system.htm
