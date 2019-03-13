@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ExpressJS</title>
+</head>
+
+<body>
+    <% include header%>
+        <div class="container">
+            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+                <% include sidebar%>
+            </div>
+            <div>
+                <ul>
+                    <% items.forEach(function(item) { %>
+                        <li>
+                            <%= item %>
+                        </li>
+                        <% }); %>
+                </ul>
+            </div>
+            <% include footer%>
+        </div>
+        </div>
+</body>
+</html>
