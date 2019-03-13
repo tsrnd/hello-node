@@ -103,3 +103,12 @@ $ node truncate-file.js
 $ node write-file.js
 ```
 - directory : same with file : https://www.tutorialspoint.com/nodejs/nodejs_file_system.htm
+
+## D4
+### Global object 
+
+- __dirname
+- setTimeout
+- clearTimeout
+- setInterval
+- clearInterval
