@@ -1,24 +1,19 @@
-import DB from '../models/DB';
+import Product from '../models/product.models';
+import { ObjectId } from 'mongodb';
 const ProductController = {};
 
 ProductController.index = async (req, res, next) => {
     try {
-        const connect = await DB.connect();
-        const db = connect.db('quan');
-        var result = await DB.findAll(db);
-        res.render('../views/products/index', {products: result})
-        connect.close();
+        var result = await Product.find();
+        res.render('../views/products/index', {products: result});
     } catch (err) {
-        next(err);
+        next(err)
     }
 }
 ProductController.show = async (req, res, next) => {
     try {
-            const connect = await DB.connect();
-            const db = connect.db('quan');
-            var result = await DB.find(db, req.params.id);
-            connect.close();
-            res.render('../views/products/show', {title: 'Product', id: result._id, name: result.name, logTime: req.requestTime});
+            var result = await Product.find({ _id: new ObjectId(req.params.id) });
+            res.render('../views/products/show', {title: 'Product', id: result[0]._id, name: result[0].name, logTime: req.requestTime});
         } catch(err) {
             next(err);
         }
@@ -30,10 +25,9 @@ ProductController.create = (req, res, next) => {
 
 ProductController.store = async (req, res, next) => {
     try {
-        const connect= await DB.connect();
-        const db = connect.db('quan');
-        var result = await DB.create(db, req.body);
-        res.render('../views/products/show', {title: 'Product', id: result.ops[0]._id, name: result.ops[0].name, logTime: req.requestTime});
+        const product = new Product(req.body);
+        await product.save();
+        res.render('../views/products/show', {title: 'Product', id: product._id, name: product.name, logTime: req.requestTime});
     } catch (err) {
         next(err);
     }
@@ -41,11 +35,9 @@ ProductController.store = async (req, res, next) => {
 
 ProductController.edit = async (req, res, next) => {
     try {
-            const connect = await DB.connect();
-            const db = connect.db('quan');
-            var result = await DB.find(db, req.params.id);
-            connect.close();
-            res.render('../views/products/edit', {title: 'Product', id: result._id, name: result.name, detail: result.detail});
+            var product = await Product
+                .find({ _id: new ObjectId(req.params.id) });
+            res.render('../views/products/edit', {title: 'Product', id: product[0]._id, name: product[0].name, detail: product[0].detail});
         } catch(err) {
             next(err);
         }
@@ -53,24 +45,21 @@ ProductController.edit = async (req, res, next) => {
 
 ProductController.update = async (req, res, next) => {
     try {
-        const connect = await DB.connect();
-        const db = connect.db("quan");
-        await DB.update(db, req.params.id, {
-            name: req.body.name,
-            detail: req.body.detail
-        });
+        await Product
+            .findOneAndUpdate({
+                _id: new ObjectId(req.params.id)
+            },
+            req.body
+            );
         res.redirect('/products');
     } catch (err) {
-        next(err);
+        throw err;
     }
 };
 
 ProductController.delete = async (req, res, next) => {
     try {
-        const connect = await DB.connect();
-        const db = connect.db('quan');
-        var result = await DB.delete(db, req.params.id);
-        connect.close();
+        await Product.findByIdAndDelete(new ObjectId(req.params.id));
         res.redirect('/products');
     } catch(err) {
         next(err);
