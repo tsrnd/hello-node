@@ -12,4 +12,3 @@ ADD ./ node/hello-node
 EXPOSE ${PORT}
 
 CMD npm run debug
-

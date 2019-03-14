@@ -21,7 +21,7 @@ var auth = (req, res, next) => {
     var token = tmps[1]
     try {
         var decoded = jwt.verify(token, 'secret')
-        User.findOne({_id: decoded.id})
+        User.findOne({ _id: decoded.id })
             .then(user => {
                 console.log(user)
                 if (!user) {

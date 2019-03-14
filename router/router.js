@@ -25,16 +25,16 @@ router.group('/api/v1', (router) => {
         next()
     })
     router.post('/login', authCtrls.postLogin)
-    
+
     router.get('/books', bookCtrls.findAll)
-    router.group('/book', (route) =>{
+    router.group('/book', (route) => {
         route.get('/:bookId', bookCtrls.find)
         route.post('/', bookCtrls.create)
         route.put('/:bookId', bookCtrls.update)
         route.delete('/:bookId', bookCtrls.deleteBook)
     })
     router.use(middleware.auth).get('/posts', (req, res) => {
-        res.end(JSON.stringify({msg: 'comming soon'}))
+        res.end(JSON.stringify({ msg: 'comming soon' }))
     })
 })
 
