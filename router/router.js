@@ -1,7 +1,8 @@
 const express = require('express')
 require('express-group-routes')
 const middleware = require('../app/http/middleware/middleware')
-const apiCtrls = require('../app/http/controllers/auth_controller')
+const authCtrls = require('../app/http/controllers/auth_controller')
+const homeCtrls = require('../app/http/controllers/home_controller')
 const path = require('path')
 const bodyParser = require('body-parser');
 
@@ -22,10 +23,12 @@ router.group('/api/v1', (router) => {
         res.setHeader('Content-Type', 'application/json')
         next()
     })
-    router.post('/login', apiCtrls.postLogin)
+    router.post('/login', authCtrls.postLogin)
     router.use(middleware.auth).get('/posts', (req, res) => {
         res.end(JSON.stringify({msg: 'comming soon'}))
     })
 })
+
+router.get('/*', homeCtrls.index)
 
 module.exports = router
