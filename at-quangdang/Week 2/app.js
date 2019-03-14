@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParse = require('body-parser');
 const mongoose = require('mongoose');
 
-const postRouter = require('./routers/posts');
-const userRouter = require('./routers/user');
+const postRouter = require('./routes/posts');
+const userRouter = require('./routes/user');
 
 const app = express();
 
