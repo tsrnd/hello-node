@@ -18,10 +18,15 @@ var successResponse = (res, data) => {
     res.status(200).end(JSON.stringify(data))
 }
 
+var notFoundResponse = (res, data = {msg: 'Not Found'}) => {
+    res.status(400).end(JSON.stringify(data))
+}
+
 module.exports = {
     internalServerResponse,
     badRequestResponse,
     unauthorizedResponse,
     forbiddenResponse,
     successResponse,
+    notFoundResponse,
 }

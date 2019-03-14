@@ -3,6 +3,7 @@ require('express-group-routes')
 const middleware = require('../app/http/middleware/middleware')
 const authCtrls = require('../app/http/controllers/auth_controller')
 const homeCtrls = require('../app/http/controllers/home_controller')
+const bookCtrls = require('../app/http/controllers/book_controller')
 const path = require('path')
 const bodyParser = require('body-parser');
 
@@ -24,6 +25,14 @@ router.group('/api/v1', (router) => {
         next()
     })
     router.post('/login', authCtrls.postLogin)
+    
+    router.get('/books', bookCtrls.findAll)
+    router.group('/book', (route) =>{
+        route.get('/:bookId', bookCtrls.find)
+        route.post('/', bookCtrls.create)
+        route.put('/:bookId', bookCtrls.update)
+        route.delete('/:bookId', bookCtrls.deleteBook)
+    })
     router.use(middleware.auth).get('/posts', (req, res) => {
         res.end(JSON.stringify({msg: 'comming soon'}))
     })

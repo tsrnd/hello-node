@@ -2,6 +2,7 @@ const express = require('express')
 const util = require('util')
 const router = require('./router/router')
 const path = require('path')
+const db = require('./utils/db')
 
 var app = express()
 var port = process.env.PORT
