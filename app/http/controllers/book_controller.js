@@ -2,12 +2,26 @@ const Book = require('../../../models/book')
 const utils = require('../../../utils/http')
 
 var findAll = (req, res) => {
-    Book.find()
-        .then(books => {
-            res.send(books);
+    const per_page = 10
+    Book.paginate({
+        name: {
+            $regex: new RegExp(`${req.query.q}.*`)
+        },
+    }, {
+            select: { _id: 1, name: 1, author: 1, page_number: 1 },
+            page: parseInt(req.query.page) || 1,
+            limit: per_page,
+            sort: { name: -1 }
+        })
+        .then(results => {
+            return utils.successResponse(res, {
+                total_pages: results.pages,
+                current_page: results.page,
+                books: results.docs
+            })
         }).catch(err => {
             console.error(err)
-            utils.internalServerResponse(res, 'Some error occurred')
+            return utils.internalServerResponse(res, 'Some error occurred')
         })
 }
 
@@ -69,7 +83,7 @@ var deleteBook = (req, res) => {
             if (!book) {
                 return utils.notFoundResponse(res)
             }
-            return utils.successResponse(res, {msg: 'Deleted'})
+            return utils.successResponse(res, { msg: 'Deleted' })
         }).catch(err => {
             console.error(err)
             return utils.internalServerResponse(res)

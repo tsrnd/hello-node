@@ -1,43 +1,29 @@
-const fs = require('fs')
-const md5 = require('md5');
-const path = require('path')
-const jwt = require('jsonwebtoken');
+const md5 = require('md5')
+const jwt = require('jsonwebtoken')
 const utils = require('../../../utils/http')
+const User = require('../../../models/user')
 
 
 var postLogin = (req, res) => {
-    user = {
+    User.findOne({
         username: req.body.username,
         password: md5(req.body.password)
-    }
-
-    streamFile = fs.ReadStream(path.join(__dirname, './../../../tmp/users.json'), (err) => {
-        if (err) {
-            console.error(err)
-            utils.internalServerResponse(res)
+    }).then(user => {
+        if (!user) {
+            return utils.unauthorizedResponse(res)
         }
-    })
-    jsonData = ''
-    streamFile.on('data', (chunk) => {
-        jsonData += chunk.toString()
-    })
-    streamFile.on('end', () => {
-        users = JSON.parse(jsonData)
-        user = users.find((u) => {
-            return u.username == user.username && u.password == user.password
+        // create a token
+        var token = jwt.sign({ id: user.id }, 'secret', {
+            expiresIn: 86400 // expires in 24 hours
         })
-        if (user) {
-            // create a token
-            var token = jwt.sign({ id: user.id }, 'secret', {
-                expiresIn: 86400 // expires in 24 hours
-            })
-            utils.successResponse(res, {
-                token: token
-            })
-        } else {
-            utils.unauthorizedResponse(res)
-        }
+        return utils.successResponse(res, {
+            token: token
+        })
+    }).catch(err => {
+        console.error(err)
+        return utils.internalServerResponse(res)
     })
+
 }
 
 module.exports = {

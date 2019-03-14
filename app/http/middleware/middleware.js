@@ -1,6 +1,7 @@
 const accesslog = require('access-log')
 const jwt = require('jsonwebtoken')
 const utils = require('../../../utils/http')
+const User = require('../../../models/user')
 
 // accessLog access log midlewave
 var accessLog = (req, res, next) => {
@@ -20,14 +21,21 @@ var auth = (req, res, next) => {
     var token = tmps[1]
     try {
         var decoded = jwt.verify(token, 'secret')
-        if (decoded.id != 0) {
-            return next()
-        }
+        User.findOne({_id: decoded.id})
+            .then(user => {
+                console.log(user)
+                if (!user) {
+                    return utils.unauthorizedResponse(res)
+                }
+                return next()
+            }).catch(err => {
+                console.error(err)
+                return utils.internalServerResponse(res)
+            })
     } catch (err) {
         console.log(err)
+        return utils.unauthorizedResponse(res)
     }
-
-    utils.unauthorizedResponse(res)
 }
 
 module.exports = {
