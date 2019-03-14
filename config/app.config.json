@@ -1,0 +1,6 @@
+{
+    "auth": {
+        "expired": 360000,
+        "secret_key": "secret"
+    }
+}
