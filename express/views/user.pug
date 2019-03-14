@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.2/css/all.css", integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr", crossorigin="anonymous")
+        title=title
+    body
+        h1 User,  
+            =data.item
+        table(border="1")
+            tr
+                th(width="100px") attr
+                th value
+            tr
+                td id
+                td=data._id
+            tr
+                td item
+                td=data.item
+            tr
+                td qty
+                td=data.qty
+            tr
+                td id
+                td=data._id
+            tr
+                td size
+                td  h:
+                    =data.size.h
+                    br
+                    |w:
+                    =data.size.w
+                    br
+                    |uom: 
+                    =data.size.uom
+            tr
+                td status
+                td=data.status

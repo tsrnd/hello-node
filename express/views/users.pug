@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.2/css/all.css", integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr", crossorigin="anonymous")
+        title=title
+    body
+        h1=title
+        a(name="Add", href="/user/add")
+            i.fas.fa-plus-circle
+        p
+            | size:
+            =data.length
+        table
+            tr
+                th(width="300px", align="center") id
+                th(width="300px", align="center") item
+                th(width="300px", align="center") qty
+                th(width="300px", align="center") status
+                th(width="300px", align="center") option
+            - for(item of data)
+                tr
+                    td(align="center")
+                        a(href=`/user/${item._id}`, title="title")=item._id
+                    td(align="center")=item.item
+                    td(align="center")=item.qty
+                    td(align="center")=item.status
+                    td(align="center")
+                        a(href=`#`, data-id=item._id, onclick=`submitDelete(this)`)#link.far.fa-trash-alt
+                        |_ _ 
+                        a(href=`/user/${item._id}/edit`, name="Edit").fas.fa-pencil-alt
+        | Pages: 
+        - for (i = 1; i < pages; i++)
+            a(href=`/user?page=${i}`)=i 
+            |- - -
+        a(href=`/user?page=${pages}`)=pages
+        form(method="post", hidden="true")#formdelete
+        script.
+            var submitDelete = function(target){
+                var url = `/user/${target.getAttribute('data-id')}/delete?_method=DELETE`
+                $('#formdelete').attr("action", url);
+                $('#formdelete').submit();
+            }
+        script(src="https://code.jquery.com/jquery-3.3.1.min.js")        
