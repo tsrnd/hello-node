@@ -4,7 +4,7 @@ const router = require('./router/router')
 const path = require('path')
 
 var app = express()
-var port = 3001
+var port = process.env.PORT
 
 // apply router
 app.use(router)

@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach to docker",
+            "type": "node",
+            "request": "attach",
+            "port": 9222,
+            "address": "localhost",
+            "restart": false,
+            "sourceMaps": false,
+            "localRoot": "${workspaceRoot}",
+            "remoteRoot": "/node/hello-node"
+        }
+    ]
+}

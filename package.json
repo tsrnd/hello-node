@@ -4,7 +4,8 @@
   "description": "Learning node basic",
   "main": "main.js",
   "scripts": {
-    "build-development": "nodemon ./express/main.js"
+    "build-development": "nodemon ./main.js",
+    "debug": "nodemon --legacy-watch --watch ./ --inspect=0.0.0.0:9222 --nolazy ./main.js"
   },
   "author": "at-namnguyen",
   "license": "ISC",
