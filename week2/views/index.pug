@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.2/css/all.css", integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr", crossorigin="anonymous")
+        title=title
+    body
+        h1(align="center")= title
+        
+        table
+            tr
+                th(width="300px", align="center") id
+                th(width="300px", align="center") first-name
+                th(width="300px", align="center") last-name
+                th(width="300px", align="center") email
+                th(width="300px", align="center") phone
+            - for(item of data)
+                tr
+                    td(align="center")
+                        a(href=`user/${item._id}`, title="title")=item._id
+                    td(align="center")=item.firstName
+                    td(align="center")=item.lastName
+                    td(align="center")=item.email
+                    td(align="center")=item.phone
+                    td(align="center")
+                        a(href=`#`)#link.far.fa-trash-alt
+                        a(href=`#`).fas.fa-pencil-alt

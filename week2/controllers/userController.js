@@ -1,13 +1,14 @@
 User = require('../models/userModel');
 
 exports.index = function(req, res) {
-    User.find(function(err, users){
+    User.find().sort({ firstName: -1}).exec(function(err, users){
         if (err) 
             res.json({
                 status: "Error",
                 message:err
             });
-        res.json({
+        res.render('index',{
+            title: "List Users",
             data: users,
         })
     })
@@ -33,7 +34,7 @@ exports.detail = function(req, res){
     User.findById(req.params.userId, function(err, user){
         if(err) 
             res.send(err);
-        res.json({
+        res.render('detail',{
             data: user
         })
     })

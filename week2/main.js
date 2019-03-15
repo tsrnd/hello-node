@@ -3,6 +3,10 @@ let apiRoutes = require("./routes/user_route")
 let bodyParser = require("body-parser");
 let mongoose = require("mongoose");
 let app = express();
+app.set('views', __dirname + '/views');
+app.set('view engine', 'pug')
+
+
 app.use(bodyParser.urlencoded({
     extended: true
 }));
