@@ -1,27 +1,29 @@
-let express = require('express');
-let bodyParser = require('body-parser');
-let mongoose = require('mongoose');
+let express = require('express')
+let bodyParser = require('body-parser')
 // Initialize the app
 let app = express();
 // Import routes
 let apiRoutes = require("./routes/contact")
+let db = require('./db/connect')
+
+// Use Api routes in the App
+app.use('/api', apiRoutes)
 // Configure bodyparser to handle post requests
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
-// Connect to Mongoose and set connection variable
-mongoose.connect('mongodb://localhost/resthub', {
-    useNewUrlParser: true
-});
-var db = mongoose.connection;
-// Setup server port
-var port = process.env.PORT || 8081;
-// Send message for default URL
-app.get('/', (req, res) => res.send('Hello World!'));
-// Use Api routes in the App
-app.use('/api', apiRoutes)
-// Launch app to listen to specified port
-app.listen(port, function () {
-    console.log("Running server on port " + port);
+
+app.set('view engine', 'pug');
+app.get('/', function (req, res) {
+    res.render('index', {
+        title: 'Hey',
+        message: 'Hello there!'
+    })
+})
+
+var server = app.listen(8000, () => {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log("Server is running at  http://%s:%s", host, port);
 });
