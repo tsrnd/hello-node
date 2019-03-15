@@ -31,7 +31,7 @@ module.exports.isAuthorized  = (req, res, next) => {
                     return element.id == decoded.data.id
                 })
                 if (user == null) {
-                    res.sendStatus(404);
+                    res.status(400).send("Unauthorization!");
                     return
                 }
                 req.user = user

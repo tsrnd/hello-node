@@ -1,0 +1,11 @@
+{
+    "jwt": {
+        "private_key": "my_private_key",
+        "expired": 604800
+    },
+    "db": {
+        "user": "myuser",
+        "password": "mypass",
+        "db_name": "mydb"
+    }
+}
