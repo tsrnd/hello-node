@@ -1,40 +1,41 @@
 <!DOCTYPE html>
 html(lang="en")
-    head
+    headstylesheet
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
-        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.2/css/all.css", integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr", crossorigin="anonymous")
+        link(rel="", href="https://use.fontawesome.com/releases/v5.7.2/css/all.css", integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr", crossorigin="anonymous")
         title=title
     body
         h1 User,  
-            =data.item
+            =data.username
         table(border="1")
             tr
                 th(width="100px") attr
                 th value
             tr
-                td id
-                td=data._id
+                td ID
+                td=data.user_id
             tr
-                td item
-                td=data.item
+                td Name
+                td=data.fullname
             tr
-                td qty
-                td=data.qty
+                td Age
+                td=data.age
             tr
-                td id
-                td=data._id
+                td Email
+                td=data.email
             tr
-                td size
-                td  h:
-                    =data.size.h
+                td Avatar
+                td
+                    img(src=`/images/${data.avatar}`, width="100px", height="100px")
+            tr
+                td Bio
+                td  H:
+                    =data.bio.h
                     br
-                    |w:
-                    =data.size.w
-                    br
-                    |uom: 
-                    =data.size.uom
+                    |W:
+                    =data.bio.w
             tr
-                td status
+                td Status
                 td=data.status

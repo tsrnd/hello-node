@@ -12,25 +12,27 @@ html(lang="en")
             i.fas.fa-plus-circle
         p
             | size:
-            =data.length
+            =total
         table
             tr
-                th(width="300px", align="center") id
-                th(width="300px", align="center") item
-                th(width="300px", align="center") qty
-                th(width="300px", align="center") status
-                th(width="300px", align="center") option
-            - for(item of data)
+                th(width="200px", align="center") ID
+                th(width="200px", align="center") Name
+                th(width="200px", align="center") Email
+                th(width="200px", align="center") Status
+                th(width="200px", align="center") Option
+            - for(user of data)
                 tr
                     td(align="center")
-                        a(href=`/user/${item._id}`, title="title")=item._id
-                    td(align="center")=item.item
-                    td(align="center")=item.qty
-                    td(align="center")=item.status
+                        a(href=`/user/${user.user_id}`, title="title")=user.user_id
+                    td(align="center")=user.fullname
+                    td(align="center")=user.email
                     td(align="center")
-                        a(href=`#`, data-id=item._id, onclick=`submitDelete(this)`)#link.far.fa-trash-alt
+                        img(src=`images/${user.avatar}`, width="50px", height="50px")
+                    td(align="center")=user.status
+                    td(align="center")
+                        a(href=`#`, data-id=user.user_id, onclick=`submitDelete(this)`)#link.far.fa-trash-alt
                         |_ _ 
-                        a(href=`/user/${item._id}/edit`, name="Edit").fas.fa-pencil-alt
+                        a(href=`/user/${user.user_id}/edit`, name="Edit").fas.fa-pencil-alt
         | Pages: 
         - for (i = 1; i < pages; i++)
             a(href=`/user?page=${i}`)=i 
@@ -43,4 +45,4 @@ html(lang="en")
                 $('#formdelete').attr("action", url);
                 $('#formdelete').submit();
             }
-        script(src="https://code.jquery.com/jquery-3.3.1.min.js")        
+        script(src="https://code.jquery.com/jquery-3.3.1.min.js")

@@ -1,12 +1,23 @@
-var db = require('./db');
+const db = require('./db');
 
-exports.User = new db.model('User', {
-    item: String,
-    qty: Number,
-    size: {
+const userSchema = new db.schema({
+    username: String,
+    fullname: String,
+    pasword: String,
+    email: String,
+    avatar: String,
+    age: Number,
+    bio: {
         h: Number,
         w: Number,
-        uom: String
     },
-    status: String
+    status: Boolean
 });
+
+userSchema.plugin(db.autoInc, {
+    model: 'Users',
+    field: 'user_id',
+    startAt: 1
+});
+
+exports.Users = db.conn.model('Users', userSchema);

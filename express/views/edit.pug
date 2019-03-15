@@ -5,29 +5,40 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.2/css/all.css", integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr", crossorigin="anonymous")
+        script(src="https://code.jquery.com/jquery-3.3.1.min.js")
+        script(src="/js/file.js")
         title=title
     body
         h1=title
-        =data._id
-        form(action=`/user/${data._id}/update?_method=PUT`, method="post")
-            label(for="item") Item: 
-            input(type="text", name="item", value=data.item)
+        form(action=`/user/${data.user_id}?_method=PUT`, method="post", enctype="multipart/form-data")
+            label(for="Username") Username: 
+            input(type="text", name="username" value=data.username)
             br
-            label(for="qty") Qty: 
-            input(type="number", name="qty", value=data.qty)
+            label(for="Name") Name: 
+            input(type="text", name="fullname" value=data.fullname)
+            br
+            label(for="Password") Password: 
+            input(type="password", name="password" value=data.password)
+            br
+            label(for="Email") Email: 
+            input(type="email", name="email" value=data.email)
+            br
+            label(for="Age") Age: 
+            input(type="number", name="age" value=data.age)
+            br
+            label(for="Avatar") Avatar:
+            img#previewImage(src=`/images/${data.avatar}`, width="100px", height="100px") 
+            input#inputImage(type="file", name="avatar")
             br            
-            label(for="status") Status: 
-            input(type="text", name="status", value=data.status)
+            label(for="Status") Status: 
+            input(type="checkbox", name="status" checked=data.status)
             br
-            label(for="size") Size
+            label(for="Bio") Bio
                 br
-                label(for="w") w: 
-                input(type="number", name="w", value=data.size.w)
+                label(for="w") W: 
+                input(type="number", name="w" value=data.bio.w)
                 br
-                label(for="h") h: 
-                input(type="number", name="h", value=data.size.h)
-                br
-                label(for="uom") uom: 
-                input(type="text", name="uom", value=data.size.uom)
+                label(for="h") H: 
+                input(type="number", name="h" value=data.bio.h)
                 br
             button(value="submit") Edit
