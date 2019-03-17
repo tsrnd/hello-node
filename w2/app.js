@@ -6,6 +6,7 @@ var logger = require('morgan');
 var methodOverride = require('method-override');
 var indexRouter = require('./routes/index');
 import product from './routes/product.routes';
+import user from './routes/user.routes';
 
 var app = express();
 
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // ----------Use router------------
 app.use('/', indexRouter);
+app.use('/user', user);
 app.use('/products', product);
 
 // catch 404 and forward to error handler
