@@ -23,6 +23,20 @@ exports.list = function (req, res, next) {
     })
 };
 
+exports.roles = function (req, res, next) {
+    model.Roles.find().populate('users').exec(function (err, data) {
+        if (err) {
+            error.statusCode = 400
+            next(error)
+        }
+        console.log(data.users);
+        res.render('roles', {
+            title: 'Roles',
+            data: data,
+        });
+    })
+};
+
 exports.view = function (req, res, next) {
     model.Users.findOne({
         user_id: req.params.id
@@ -78,7 +92,9 @@ exports.store = function (req, res, next) {
         if (error) {
             if (fileName) {
                 fs.unlink(`${__dirname}/public/images/${fileName}`, function (err) {
-                    next(err);
+                    if (err) {
+                        next(err);
+                    }
                 })
             }
             error.statusCode = 400
@@ -137,7 +153,9 @@ exports.update = function (req, res, next) {
         if (error) {
             if (data.avatar) {
                 fs.unlink(`${__dirname}/public/images/${fileName}`, function (err) {
-                    next(err);
+                    if (err) {
+                        next(err);
+                    }
                 })
             }
             error.statusCode = 500

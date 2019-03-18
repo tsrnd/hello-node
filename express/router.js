@@ -7,6 +7,7 @@ router.use(bp.urlencoded({
     extended: false
 }));
 
+router.get('/user/roles', user.roles);
 router.get('/user', user.list);
 router.get('/user/add', user.add);
 router.get('/user/:id', user.view);

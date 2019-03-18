@@ -18,6 +18,7 @@ html(lang="en")
                 th(width="200px", align="center") ID
                 th(width="200px", align="center") Name
                 th(width="200px", align="center") Email
+                th(width="200px", align="center") Avatar
                 th(width="200px", align="center") Status
                 th(width="200px", align="center") Option
             - for(user of data)
@@ -27,7 +28,7 @@ html(lang="en")
                     td(align="center")=user.fullname
                     td(align="center")=user.email
                     td(align="center")
-                        img(src=`images/${user.avatar}`, width="50px", height="50px")
+                        img(src=`/images/${user.avatar}`, width="50px", height="50px")
                     td(align="center")=user.status
                     td(align="center")
                         a(href=`#`, data-id=user.user_id, onclick=`submitDelete(this)`)#link.far.fa-trash-alt

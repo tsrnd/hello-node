@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.2/css/all.css", integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr", crossorigin="anonymous")
+        title=title
+    body
+        h1=title
+        a(name="Add", href="/user/add")
+            i.fas.fa-plus-circle
+        p
+        -for (role of data)
+            h2=role.description
+            table
+                tr
+                    th(width="200px", align="center") ID
+                    th(width="200px", align="center") Name
+                    th(width="200px", align="center") Email
+                    th(width="200px", align="center") Avatar
+                    th(width="200px", align="center") Status
+                    th(width="200px", align="center") Option
+                - for(user of role.users)
+                    tr
+                        td(align="center")
+                            a(href=`/user/${user.user_id}`, title="title")=user.user_id
+                        td(align="center")=user.fullname
+                        td(align="center")=user.email
+                        td(align="center")
+                            img(src=`/images/${user.avatar || 'default.jpg'}`, width="50px", height="50px")
+                        td(align="center")=user.status
+                        td(align="center")
+                            a(href=`#`, data-id=user.user_id, onclick=`submitDelete(this)`)#link.far.fa-trash-alt
+                            |_ _ 
+                            a(href=`/user/${user.user_id}/edit`, name="Edit").fas.fa-pencil-alt
+        form(method="post", hidden="true")#formdelete
+        script.
+            var submitDelete = function(target){
+                var url = `/user/${target.getAttribute('data-id')}/delete?_method=DELETE`
+                $('#formdelete').attr("action", url);
+                $('#formdelete').submit();
+            }
+        script(src="https://code.jquery.com/jquery-3.3.1.min.js")

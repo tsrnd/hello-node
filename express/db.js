@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const autoIncrement = require('mongoose-auto-increment');
-const Schema = mongoose.Schema;
 
 const DBNAME = 'test';
 const PORT = 27017;
@@ -14,5 +13,5 @@ autoIncrement.initialize(connection);
 module.exports = {
     conn: connection,
     autoInc: autoIncrement.plugin,
-    schema: Schema
+    schema: mongoose.Schema
 }
