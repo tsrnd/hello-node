@@ -8,9 +8,9 @@ exports.product_create = function (req, res) {
         }
     );
 
-    product.save(function (err) {
+    product.save(function (err, data) {
         if (err) throw err;
-        res.send('Product Created successfully')
+        res.send(data);
     })
 };
 
