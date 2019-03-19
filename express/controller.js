@@ -149,30 +149,60 @@ exports.update = function (req, res, next) {
     }
     model.Users.findOneAndUpdate({
         user_id: req.params.id
-    }, data, function (error, result) {
+    }, data, {
+        new: false
+    }, function (error, result) {
         if (error) {
-            if (data.avatar) {
-                fs.unlink(`${__dirname}/public/images/${fileName}`, function (err) {
-                    if (err) {
-                        next(err);
-                    }
-                })
-            }
-            error.statusCode = 500
             next(error)
+        }
+        console.log(result);
+        if (result.avatar) {
+            fs.unlink(`${__dirname}/public/images/${result.avatar}`, function (err) {
+                if (err) {
+                    next(err);
+                }
+            })
         }
         res.redirect(`/user`);
     });
 };
 
 exports.delete = function (req, res, next) {
-    model.Users.deleteOne({
-        user_id: req.params.id
-    }, function (error) {
+    model.Users.findOne(function (error, user) {
         if (error) {
-            error.statusCode = 500
             next(error)
         }
-        res.redirect(`/user`);
+        model.Roles.findOne({
+            _id: user.role
+        }, (error, role) => {
+            if (error) {
+                next(error);
+            }
+            var indx = role.users.indexOf(user._id);
+            console.log("dsajhdskajhdjsa", indx, ": ", role.users);
+            if (indx >= 0) {
+                role.users.splice(indx, 1);
+            }
+            model.Roles.create(role, function (error) {
+                if (error) {
+                    next(error);
+                }
+                if (user.avatar) {
+                    fs.unlink(`${__dirname}/public/images/${user.avatar}`, function (err) {
+                        if (err) {
+                            next(err);
+                        }
+                    })
+                }
+                model.Users.deleteOne({
+                    _id: user.id
+                }, function (error, data) {
+                    if (error) {
+                        next(error)
+                    }
+                    res.redirect(`/user`);
+                });
+            })
+        })
     });
 };

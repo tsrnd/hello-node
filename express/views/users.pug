@@ -42,7 +42,7 @@ html(lang="en")
         form(method="post", hidden="true")#formdelete
         script.
             var submitDelete = function(target){
-                var url = `/user/${target.getAttribute('data-id')}/delete?_method=DELETE`
+                var url = `/user/${target.getAttribute('data-id')}?_method=DELETE`
                 $('#formdelete').attr("action", url);
                 $('#formdelete').submit();
             }

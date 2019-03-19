@@ -78,6 +78,27 @@ userSchema.post("save", function (next) {
     })
 })
 
+// userSchema.pre("remove", {
+//     query: true,
+//     doc: true
+// }, function (next) {
+//     console.log("a".repeat(10), this);
+//     // var user = this;
+//     // roleModel.findOne({
+//     //     _id: user.role
+//     // }, (error, data) => {
+//     //     if (error) {
+//     //         next(error);
+//     //     }
+//     //     // data.users.remove(user.role);
+//     //     // roleModel.create(data, function (error) {
+//     //     //     if (error) {
+//     //     //         next(error);
+//     //     //     }
+//     //     // })
+//     // })
+// })
+
 module.exports = {
     Users: db.conn.model('Users', userSchema),
     Roles: roleModel,
