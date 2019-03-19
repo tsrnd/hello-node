@@ -1,0 +1,19 @@
+html
+    head
+        title Book Detail
+        block links
+            link(rel='stylesheet', type='text/css', href='/static/css/bootstrap.min.css')
+            link(rel='stylesheet', type='text/css', href='/static/css/custom.css')
+    body
+        div(class="container")
+            block head
+                include ./../page/header
+            block content
+                div(class="border-custom")
+                    div(class="mt-2")
+                        div(class="book-name")
+                            p(class="text-center")= book.name
+                        div(class="book-body")
+                            img(class=("book-image"), src="upload/book/"+book.image, alt="img")
+            block foot
+                include ./../page/footer

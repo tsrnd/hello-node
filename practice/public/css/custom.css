@@ -1,0 +1,47 @@
+.logo-custom {
+    width: 40%;
+    height: 20%;
+}
+
+.border-custom {
+    border: 1px solid blue;
+    margin: 1%;
+    height:  350px;
+}
+
+.border-custom::after{
+    display: block;
+    content: "";
+    clear: both;
+}
+
+.newborder {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border: 1px solid lightslategray;
+}
+
+.mt-2 {
+    margin: 1%;
+}
+
+.custom-pagination {
+    margin: 1%;
+    padding-left: 43.5%;
+}
+
+.book-image {
+    border: 0;
+    height: 100%;
+    float: left;
+    width: 75%;
+}
+
+.book-name {
+    height: 10%;
+}
+
+.book-body {
+    height: 82%;
+    width: 50%;
+}
