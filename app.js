@@ -2,6 +2,7 @@ console.log('is app')
 const express = require('express');
 const bodyParse = require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path')
 
 const userRouter = require('./routers/user');
 const app = express();
@@ -21,6 +22,8 @@ app.use(function(req, res, next) {
     next();
 });
 
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, '/views'));
 app.use('/api/user', userRouter);
 
 module.exports = app;

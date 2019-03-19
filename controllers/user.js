@@ -2,9 +2,15 @@ console.log('is controller')
 const bcrypt = require('bcrypt');
 
 const User = require('../models/user');
+// const pug = require('pug')
+
+exports.index = (req, res) => {
+    res.render('index', {title: 'hello nodejs', posts: ['1', '2', '3'] })
+}
 
 exports.createUser = (req, res) => {
     bcrypt.hash(req.body.password, 10).then(hash => {
+        
         const user = new User({
             email: req.body.email,
             password: hash
