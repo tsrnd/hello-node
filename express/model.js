@@ -1,9 +1,22 @@
 const db = require('./db');
+const bcrypt = require('bcrypt');
 
 const userSchema = new db.schema({
-    username: String,
-    fullname: String,
-    pasword: String,
+    username: {
+        type: String,
+        trim: true,
+        required: true,
+        unique: true
+    },
+    fullname: {
+        type: String,
+        trim: true,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
     email: String,
     avatar: String,
     role: {
@@ -78,6 +91,10 @@ userSchema.post("save", function (next) {
     })
 })
 
+userSchema.methods.comparePassword = function (password) {
+    return bcrypt.compareSync(password, this.password);
+}
+
 // userSchema.pre("remove", {
 //     query: true,
 //     doc: true
@@ -99,7 +116,21 @@ userSchema.post("save", function (next) {
 //     // })
 // })
 
+var func = {
+    FindOne: (model, condition) => {
+        return new Promise((resolve, reject) => {
+            model.findOne(condition, (err, data) => {
+                if (err) {
+                    reject(error);
+                }
+                resolve(data);
+            })
+        });
+    }
+};
+
 module.exports = {
     Users: db.conn.model('Users', userSchema),
     Roles: roleModel,
+    Func: func
 }

@@ -2,10 +2,16 @@ var express = require('express');
 var bp = require('body-parser');
 var router = express.Router();
 var user = require('./controller');
+var middleware = require('./middleware');
 
 router.use(bp.urlencoded({
     extended: false
 }));
+
+router.get('/login', user.getLogin);
+router.post('/login', user.login);
+
+router.use(middleware.Auth);
 
 router.get('/user/roles', user.roles);
 router.get('/user', user.list);

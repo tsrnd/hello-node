@@ -1,4 +1,6 @@
 var model = require('./model');
+var bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
 var fs = require('fs');
 
 exports.list = function (req, res, next) {
@@ -75,20 +77,23 @@ exports.store = function (req, res, next) {
             })
         })
     }
-    var data = {
-        username: req.body.username,
-        password: req.body.password,
-        fullname: req.body.fullname,
-        email: req.body.email,
-        avatar: fileName,
-        age: req.body.age,
-        status: req.body.status === 'on',
-        bio: {
-            w: req.body.w,
-            h: req.body.h,
-        }
-    };
-    model.Users.create(data, function (error, data) {
+    // var data = {
+    //     username: req.body.username,
+    //     password: req.body.password,
+    //     fullname: req.body.fullname,
+    //     email: req.body.email,
+    //     avatar: fileName,
+    //     age: req.body.age,
+    //     status: req.body.status === 'on',
+    //     bio: {
+    //         w: req.body.w,
+    //         h: req.body.h,
+    //     }
+    // };
+    var user = new model.Users(req.body);
+    user.status = req.body.status === 'on'
+    user.password = bcrypt.hashSync(req.body.password, 10);
+    user.save(function (error, data) {
         if (error) {
             if (fileName) {
                 fs.unlink(`${__dirname}/public/images/${fileName}`, function (err) {
@@ -104,19 +109,30 @@ exports.store = function (req, res, next) {
     });
 };
 
-exports.edit = function (req, res, next) {
-    model.Users.findOne({
-        user_id: req.params.id
-    }, function (error, data) {
-        if (error) {
-            error.statusCode = 400
-            next(error)
-        }
+exports.edit = async function (req, res, next) {
+    // model.Users.findOne({
+    //     user_id: req.params.id
+    // }, function (error, data) {
+    //     if (error) {
+    //         error.statusCode = 400
+    //         next(error)
+    //     }
+    //     res.render('edit', {
+    //         title: 'Edit Users',
+    //         data: data
+    //     });
+    // })
+    try {
+        var data = await model.Func.FindOne(model.Users, {
+            user_id: req.params.id
+        });
         res.render('edit', {
             title: 'Edit Users',
             data: data
         });
-    })
+    } catch (error) {
+        next(error)
+    }
 };
 
 exports.update = function (req, res, next) {
@@ -206,3 +222,34 @@ exports.delete = function (req, res, next) {
         })
     });
 };
+
+exports.getLogin = function (req, res, next) {
+    res.render('login', {
+        title: 'Login'
+    })
+}
+
+exports.login = async function (req, res, next) {
+    try {
+        var user = await model.Func.FindOne(model.Users, {
+            username: req.body.username
+        });
+        if (!user) {
+            // throw new ErrorEvent("user not exist")
+            next("usernotexist");
+        }
+        if (user.comparePassword(req.body.password)) {
+            res.send({
+                token: jwt.sign({
+                    username: user.username,
+                    id: user.user_id
+                }, 'RESTFULAPIs')
+            })
+        }
+        res.send({
+            message: "error"
+        })
+    } catch (error) {
+        next(error);
+    }
+}
