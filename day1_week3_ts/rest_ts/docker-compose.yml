@@ -1,0 +1,20 @@
+version: '3'
+services:
+  my_mongo:
+    build:
+      context: .
+      dockerfile: mongo.Dockerfile
+    expose:
+      - 27017
+    ports:
+      - "27017:27017"
+    command: mongod
+  my_postgres:
+    image: postgres:11.1-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: 'mydb'
+      POSTGRES_USER: 'myuser'
+      POSTGRES_PASSWORD: 'mypass'
+# run by "docker-compose up --build -d"

@@ -1,0 +1,42 @@
+{
+  "name": "hello-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "app-root-path": "^2.1.0",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.4",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "formidable": "^1.2.1",
+    "jsonwebtoken": "^8.5.0",
+    "mongoose": "^5.4.19",
+    "multer": "^1.4.1",
+    "nodemon": "^1.18.10",
+    "pg": "^7.8.2",
+    "pug": "^2.0.3",
+    "sleep": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^11.11.4",
+    "tsc-watch": "^2.1.2",
+    "typescript": "^3.3.4000",
+    "typescript-tools": "^0.3.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run-refresh": "tsc-watch --onSuccess 'nodemon ./tmp/app.js'",
+    "debug": "nodemon --legacy-watch --watch ./ --inspect=0.0.0.0:9222 --nolazy ./day4_week2/rest/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tsrnd/hello-node.git"
+  },
+  "author": "at-yenho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tsrnd/hello-node/issues"
+  },
+  "homepage": "https://github.com/tsrnd/hello-node#readme"
+}
