@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const product = require('./routes/product.route');
+var methodOverride = require('method-override');
 // initialize our express app
 const app = express();
 // Set up mongoose connection
@@ -13,6 +14,8 @@ let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 const port = process.env.PORT || 3000
+app.set('view engine', 'ejs');
+app.use(methodOverride('_method'))
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/products', product);
 
