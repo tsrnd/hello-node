@@ -2,15 +2,33 @@
 Contact = require('../models/contact');
 // Handle index actions
 exports.index = function (req, res) {
-    Contact.find({}, function (err, contacts) {
-        if (err)
-            res.send(err);
-        res.json({
-            message: 'Contacts retrieved successfully!',
-            data: contacts
-        });
-    });
+    const per_page = 10
+    Contact.paginate({
+            name: {
+                $regex: new RegExp(`${req.query.q}.*`)
+            },
+        }, {
+            select: {
+                _id: 1,
+                name: 1,
+                page_number: 1
+            },
+            page: parseInt(req.query.page) || 1,
+            limit: per_page,
+            sort: {
+                name: -1
+            }
+        })
+        .then(results => {
+            return utils.successResponse(res, {
+                total_pages: results.pages,
+                current_page: results.page,
+                contacts: results.docs
+            })
+        }).catch(err => {}; console.error(err) res.status(500)
+        })
 };
+
 // Handle create contact actions
 exports.new = function (req, res) {
     var contact = new Contact();
@@ -63,14 +81,15 @@ exports.update = function (req, res) {
 };
 // Handle delete contact
 exports.delete = function (req, res) {
-    Contact.remove({
-        _id: req.params.contact_id
-    }, function (err, contact) {
-        if (err)
-            res.json(err);
-        res.json({
-            status: "success",
-            message: 'Contact deleted'
-        });
-    });
-};
+        Contact.remove({
+                _id: req.params.contact_id
+            }, function (err, contact) {
+                if (err)
+                    res.json(err);
+                else {
+                    res.json({
+                        status: "success",
+                        message: 'Contact deleted'
+                    });
+                });
+        };
