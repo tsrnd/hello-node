@@ -1,0 +1,36 @@
+{
+  "name": "NodeJS",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@types/node": "^11.11.6",
+    "access-log": "^0.4.1",
+    "express": "^4.16.4",
+    "express-generator": "^4.16.0",
+    "express-group-routes": "^1.1.0",
+    "express-validator": "^5.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "md5": "^2.2.1",
+    "md5-typescript": "^1.0.5",
+    "mongoose": "^5.4.19",
+    "mongoose-paginate": "^5.0.3",
+    "nodemon": "^1.18.10",
+    "widest-line": "^3.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://at-phatnguyen@github.com/tsrnd/hello-node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tsrnd/hello-node/issues"
+  },
+  "homepage": "https://github.com/tsrnd/hello-node#readme"
+}
